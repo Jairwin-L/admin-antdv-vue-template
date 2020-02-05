@@ -10,7 +10,7 @@
         <div class="logo">
           <img src="@/assets/logo.png" alt="logo">
         </div>
-        <a-menu theme="dark" :defaultSelectedKeys="selectedKey" mode="inline" @click="changeSelect">
+        <a-menu theme="dark" :defaultSelectedKeys="selectedKey" mode="inline" @click="onChangeSelect">
           <a-menu-item key="1">
             <a-icon type="dashboard" />
             <router-link to="/main" style="display: inline">Admin</router-link>
@@ -32,7 +32,7 @@
             </span>
             <a-menu slot="overlay">
               <a-menu-item>
-                <span @click="$router.push('/')">退出</span>
+                <span @click="modal = true">退出</span>
               </a-menu-item>
               <a-menu-item>
                 <span @click="$router.push('/auth/change-password')">修改密码</span>
@@ -67,6 +67,19 @@
         </a-layout-footer>
       </a-layout>
     </a-layout>
+    <a-modal
+      title="退出提示"
+      v-model="modal"
+      centered
+      :maskClosable="false"
+      :closable="false"
+    >
+      <p>你确认要退出</p>
+      <div slot="footer">
+        <a-button @click="modal = false">取消</a-button>
+        <a-button type="primary" @click="onLogout">确认</a-button>
+      </div>
+    </a-modal>
   </div>
 </template>
 <script>
@@ -86,18 +99,23 @@ export default {
   },
   beforeMount () {
     const selected = []
-    selected.push(localStorage.selectedKey)
+    selected.push(sessionStorage.selectedKey || 1)
     this.selectedKey = selected
   },
   components: {
     IconFont
   },
   methods: {
-    changeSelect (e) {
+    onLogout () {
+      this.modal = true
+      this.$router.push({ path: '/' })
+      sessionStorage.clear()
+    },
+    onChangeSelect (e) {
       const selected = []
       selected.push(e.key * 1)
       this.selectedKey = selected
-      localStorage.selectedKey = this.selectedKey
+      sessionStorage.selectedKey = this.selectedKey
     }
   }
 }
