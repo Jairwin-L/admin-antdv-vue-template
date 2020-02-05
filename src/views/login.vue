@@ -1,45 +1,46 @@
 <template>
   <div class="login-wrap">
     <div class="login-main">
-        <div class="login-title">
-            <img src="@/assets/logo.png" alt="">
-            <span>Ant Design Vue Admin简单模板</span>
-        </div>
-        <div class="login-tip">Ant Design Vue Admin简单模板</div>
-        <a-form
-          :form="form"
-          class="components-form-demo-normal-login login-form"
-          @submit="handleSubmit"
-        >
-          <a-form-item>
-            <a-input
-            size="large"
-              v-decorator="[
-                'username',
-                { rules: [{ required: true, message: '请输入用户名' }] }
-              ]"
-              placeholder="请输入用户名"
-            >
-              <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)"/>
-            </a-input>
-          </a-form-item>
-          <a-form-item>
-            <a-input
-            size="large"
-              v-decorator="[
-                'password',
-                { rules: [{ required: true, message: '请输入密码' }] }
-              ]"
-              type="password"
-              placeholder="请输入密码"
-            >
-              <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
-            </a-input>
-          </a-form-item>
-          <a-form-item>
-            <a-button size="large" type="primary" html-type="submit" class="login-btn">登录</a-button>
-          </a-form-item>
-        </a-form>
+      <div class="login-title">
+        <img src="@/assets/logo.png" alt="">
+        <span>Ant Design Vue Admin简单模板</span>
+      </div>
+      <div class="login-tip">Ant Design Vue Admin简单模板</div>
+      <a-form
+        :form="form"
+        class="components-form-demo-normal-login login-form"
+        @submit="handleSubmit"
+      >
+        <a-form-item>
+          <a-input
+          size="large"
+            v-decorator="[
+              'username',
+              { rules: [{ required: true, message: '请输入用户名' }] }
+            ]"
+            placeholder="请输入用户名"
+          >
+            <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+        <a-form-item>
+          <a-input
+          size="large"
+            v-decorator="[
+              'password',
+              { rules: [{ required: true, message: '请输入密码' }] }
+            ]"
+            type="password"
+            placeholder="请输入密码"
+          >
+            <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
+          </a-input>
+        </a-form-item>
+        <a-form-item>
+          <a-button size="large" type="primary" html-type="submit" class="login-btn">登录</a-button>
+        </a-form-item>
+      </a-form>
+      <p>任意输入即可登录</p>
     </div>
     <footer>
       <div class="footer-content">
