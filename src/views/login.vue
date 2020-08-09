@@ -1,7 +1,7 @@
 <template>
-  <div class="login-wrap">
-    <div class="login-main">
-      <div class="login-title">
+  <div class="login_wrap">
+    <div class="login_main">
+      <div class="login_title">
         <span>Ant Design Vue Admin</span>
       </div>
       <a-form
@@ -40,12 +40,12 @@
       </a-form>
     </div>
     <footer>
-      <div class="footer-content">
+      <div class="footer_content">
         <a href="javascript:;">帮助</a>
         <a href="javascript:;">隐私</a>
         <a href="javascript:;">条款</a>
       </div>
-      <div class="footer-right">Copyright &copy; {{year}} https://jairwin.cn Blog</div>
+      <div class="footer_right">Copyright &copy; {{year}} <a href="https://jairwin.cn" target="_blank" rel="noopener noreferrer nofollow">https://jairwin.cn</a> Blog</div>
     </footer>
   </div>
 </template>
@@ -76,18 +76,18 @@ export default {
 </script>
 
 <style scoped lang="less">
-.login-wrap {
+.login_wrap {
   width: 100%;
   height: 100vh;
   background: #f0f2f5 no-repeat center 110px;
   background-size: 100%;
   display: flex;
   flex-direction: column;
-  .login-main {
+  .login_main {
     width: 368px;
     margin: 100px auto 0;
     flex: 1 1;
-    .login-title {
+    .login_title {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -114,7 +114,7 @@ export default {
     color: rgba(0,0,0,.45);
     font-size: 14px;
     margin-bottom: 24px;
-    .footer-content {
+    .footer_content {
       margin-bottom: 8px;
       > a {
         color: rgba(0,0,0,.45);
