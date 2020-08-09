@@ -2,8 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { Form, Input, Button, message, Modal, Breadcrumb, Menu, Dropdown, LocaleProvider, Layout, Icon } from 'ant-design-vue'
+import { Form, FormModel, Input, Button, message, Modal, Breadcrumb, Menu, Dropdown, LocaleProvider, Layout, Icon } from 'ant-design-vue'
 Vue.component(Form.name, Form)
+Vue.component(FormModel.name, FormModel)
+Vue.component(FormModel.Item.name, FormModel.Item)
 Vue.component(Form.Item.name, Form.Item)
 Vue.component(Input.name, Input)
 Vue.component(Button.name, Button)

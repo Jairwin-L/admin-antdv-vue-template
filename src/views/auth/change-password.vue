@@ -1,73 +1,83 @@
 <template>
-  <a-row class="base_container">
-    <a-col :span="8">
-      <a-form
-        :form="form"
-        @submit="handleSubmit"
+  <div class="base_container">
+    <a-form-model
+        ref="ruleForm"
+        :model="form"
+        :rules="rules"
+        class="components-form-demo-normal-login login-form"
       >
-        <a-form-item>
+        <a-form-model-item ref="oldPassword" name="oldPassword" prop="oldPassword">
           <a-input
-            v-decorator="[
-              'old_password',
-              { rules: [{ required: true, message: '请输入旧密码' }] }
-            ]"
-            type="old_password"
+            size="large"
+            v-model="form.oldPassword"
+            @blur="() => { $refs.oldPassword.onFieldBlur();}"
+            type="password"
             placeholder="请输入旧密码"
           >
-            <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
+            <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)"/>
           </a-input>
-        </a-form-item>
-        <a-form-item>
+        </a-form-model-item>
+        <a-form-model-item ref="newPpassword" name="newPpassword" prop="newPpassword">
           <a-input
-            v-decorator="[
-              'new_password',
-              { rules: [{ required: true, message: '请输入新密码' }] }
-            ]"
+            size="large"
+            v-model="form.newPpassword"
+            @blur="() => { $refs.newPpassword.onFieldBlur();}"
             type="password"
             placeholder="请输入新密码"
           >
             <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
           </a-input>
-        </a-form-item>
-        <a-form-item>
+        </a-form-model-item>
+        <a-form-model-item ref="sureNnewPpassword" name="sureNnewPpassword" prop="sureNnewPpassword">
           <a-input
-            v-decorator="[
-              'sure_new_password',
-              { rules: [{ required: true, message: '请再次输入新密码' }] }
-            ]"
+            size="large"
+            v-model="form.sureNnewPpassword"
+            @blur="() => { $refs.sureNnewPpassword.onFieldBlur();}"
             type="password"
             placeholder="请再次输入新密码"
           >
             <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
           </a-input>
-        </a-form-item>
-        <a-button type="primary" html-type="submit" class="login-btn">确认修改</a-button>
-      </a-form>
-    </a-col>
-  </a-row>
+        </a-form-model-item>
+        <a-form-model-item>
+          <a-button size="large" type="primary" @click="onSubmit" class="login-btn">确认修改</a-button>
+        </a-form-model-item>
+      </a-form-model>
+  </div>
 </template>
 
 <script>
 export default {
-  beforeCreate () {
-    this.form = this.$form.createForm(this)
+  data () {
+    return {
+      year: new Date().getFullYear(),
+      form: {
+        oldPassword: '',
+        newPpassword: '',
+        sureNnewPpassword: ''
+      },
+      rules: {
+        oldPassword: [{ required: true, message: '请输入旧密码', trigger: 'change' }],
+        newPpassword: [{ required: true, message: '请输入新密码', trigger: 'change' }],
+        sureNnewPpassword: [{ required: true, message: '请再次输入新密码', trigger: 'change' }]
+      }
+    }
   },
   methods: {
-    handleSubmit (e) {
-      e.preventDefault()
-      this.form.validateFields((err, values) => {
-        let valid = false
-        valid = !err
+    onSubmit () {
+      this.$refs.ruleForm.validate(valid => {
         if (!valid) return
-        if (values.old_password === values.new_password) {
-          this.$message.warning('新旧密码一致')
+        const { oldPassword, newPpassword, sureNnewPpassword } = this.form
+        if (oldPassword === newPpassword) {
+          this.$message.warning(`新旧密码一致`)
           return
         }
-        if (values.new_password !== values.sure_new_password) {
-          this.$message.warning('2次新密码不一致')
+        if (newPpassword !== sureNnewPpassword) {
+          this.$message.warning(`2次新密码不一致`)
           return
         }
-        console.log(values)
+        console.log(this.form)
+        this.$message.success(`密码修改成功`)
         this.$router.push('/main')
       })
     }

@@ -4,40 +4,37 @@
       <div class="login_title">
         <span>Ant Design Vue Admin</span>
       </div>
-      <a-form
-        :form="form"
+      <a-form-model
+        ref="ruleForm"
+        :model="form"
+        :rules="rules"
         class="components-form-demo-normal-login login-form"
-        @submit="onSubmit"
       >
-        <a-form-item>
+        <a-form-model-item ref="username" name="username" prop="username">
           <a-input
-          size="large"
-            v-decorator="[
-              'username',
-              { rules: [{ required: true, message: '请输入用户名' }] }
-            ]"
+            size="large"
+            v-model="form.username"
+            @blur="() => { $refs.username.onFieldBlur();}"
             placeholder="请输入用户名"
           >
             <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)"/>
           </a-input>
-        </a-form-item>
-        <a-form-item>
+        </a-form-model-item>
+        <a-form-model-item ref="password" name="password" prop="password">
           <a-input
-          size="large"
-            v-decorator="[
-              'password',
-              { rules: [{ required: true, message: '请输入密码' }] }
-            ]"
+            size="large"
+            v-model="form.password"
+            @blur="() => { $refs.password.onFieldBlur();}"
             type="password"
             placeholder="请输入密码"
           >
             <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
           </a-input>
-        </a-form-item>
-        <a-form-item>
-          <a-button size="large" type="primary" html-type="submit" class="login-btn">登录</a-button>
-        </a-form-item>
-      </a-form>
+        </a-form-model-item>
+        <a-form-model-item>
+          <a-button size="large" type="primary" @click="onSubmit" class="login-btn">登录</a-button>
+        </a-form-model-item>
+      </a-form-model>
     </div>
     <footer>
       <div class="footer_content">
@@ -54,20 +51,24 @@
 export default {
   data () {
     return {
-      year: new Date().getFullYear()
+      year: new Date().getFullYear(),
+      form: {
+        username: '',
+        password: ''
+      },
+      rules: {
+        username: [
+          { required: true, message: '请输入用户名', trigger: 'change' }
+        ],
+        password: [{ required: true, message: '请输入密码', trigger: 'change' }]
+      }
     }
   },
-  beforeCreate () {
-    this.form = this.$form.createForm(this)
-  },
   methods: {
-    onSubmit (e) {
-      e.preventDefault()
-      this.form.validateFields((err, values) => {
-        let valid = false
-        valid = !err
+    onSubmit () {
+      this.$refs.ruleForm.validate(valid => {
         if (!valid) return
-        console.log(values)
+        console.log(this.form)
         this.$router.push('/main')
       })
     }

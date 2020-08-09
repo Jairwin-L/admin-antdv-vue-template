@@ -193,6 +193,11 @@ export default {
     p {
       margin-bottom: 0;
     }
+    .ant-form-item {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 }
 .ant-layout-footer {
