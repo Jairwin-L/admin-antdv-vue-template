@@ -2,14 +2,12 @@
   <div class="login-wrap">
     <div class="login-main">
       <div class="login-title">
-        <img src="@/assets/logo.png" alt="">
-        <span>Ant Design Vue Admin简单模板</span>
+        <span>Ant Design Vue Admin</span>
       </div>
-      <div class="login-tip">Ant Design Vue Admin简单模板</div>
       <a-form
         :form="form"
         class="components-form-demo-normal-login login-form"
-        @submit="handleSubmit"
+        @submit="onSubmit"
       >
         <a-form-item>
           <a-input
@@ -40,7 +38,6 @@
           <a-button size="large" type="primary" html-type="submit" class="login-btn">登录</a-button>
         </a-form-item>
       </a-form>
-      <p>任意输入即可登录</p>
     </div>
     <footer>
       <div class="footer-content">
@@ -64,7 +61,7 @@ export default {
     this.form = this.$form.createForm(this)
   },
   methods: {
-    handleSubmit (e) {
+    onSubmit (e) {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         let valid = false
@@ -88,12 +85,13 @@ export default {
   flex-direction: column;
   .login-main {
     width: 368px;
-    margin: 70px auto 0;
+    margin: 100px auto 0;
     flex: 1 1;
     .login-title {
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-bottom: 30px;
       > img {
         height: 44px;
         margin-right: 16px;
@@ -103,35 +101,6 @@ export default {
         color: rgba(0,0,0,.85);
         font-weight: bold;
       }
-    }
-    .login-tip {
-      text-align: center;
-      font-size: 14px;
-      color: rgba(0,0,0,.45);
-      margin-top: 10px;
-      margin-bottom: 50px;
-    }
-    .login-way {
-      width: 30%;
-      height: 30px;
-      text-align: center;
-      margin: 0 auto 24px;
-      color: #1890ff;
-      border-bottom: 2px solid #1890ff;
-      padding-bottom: 30px;
-    }
-    .auto-login {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 24px;
-    }
-    p {
-      width: 100%;
-      text-align: center;
-      font-size: 33px;
-      font-weight: 600;
-      padding-top: 75px;
-      padding-bottom: 40px;
     }
     .login-btn {
       width: 100%;
