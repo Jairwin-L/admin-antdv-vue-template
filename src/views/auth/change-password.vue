@@ -4,6 +4,8 @@
         ref="ruleForm"
         :model="form"
         :rules="rules"
+        @submit="onSubmit"
+        @submit.native.prevent
         class="components-form-demo-normal-login login-form"
       >
         <a-form-model-item ref="oldPassword" name="oldPassword" prop="oldPassword">
@@ -40,7 +42,7 @@
           </a-input>
         </a-form-model-item>
         <a-form-model-item>
-          <a-button size="large" type="primary" @click="onSubmit" class="login-btn">确认修改</a-button>
+          <a-button size="large" type="primary"  html-type="submit" @click="onSubmit" class="login-btn">确认修改</a-button>
         </a-form-model-item>
       </a-form-model>
   </div>
